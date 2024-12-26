@@ -57,7 +57,7 @@ kotlin {
             implementation(libs.koalaplot)
 
 
-            implementation(libs.dataframe.jdbc)
+//            implementation(libs.dataframe.jdbc)
             implementation(libs.sqlite.jdbc)
 
         }

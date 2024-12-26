@@ -8,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreen
-import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreenVM
+//import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreen
+//import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreenVM
 import io.vladyslavv_ua.time_tracker.feature.project.ProjectScreen
 import io.vladyslavv_ua.time_tracker.feature.project.ProjectViewModel
 import org.koin.compose.koinInject
@@ -45,8 +45,8 @@ fun RootNavigation(navController: NavHostController) {
 
         composable<Graph.FullStatistics> {
 
-            val vm: FullStatisticsScreenVM = koinInject()
-            FullStatisticsScreen(navController, vm)
+//            val vm: FullStatisticsScreenVM = koinInject()
+//            FullStatisticsScreen(navController, vm)
         }
 
     }

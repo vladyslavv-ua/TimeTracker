@@ -14,7 +14,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import io.vladyslavv_ua.time_tracker.feature.projects.modal.CreateProjectDialog
 import io.vladyslavv_ua.time_tracker.feature.projects.modal.DeleteConfirmationDialog
@@ -96,42 +98,50 @@ fun ProjectsScreen(navController: NavController, viewModel: ProjectsViewModel) {
                 Icon(Icons.Filled.Add, contentDescription = "New project")
             }
         }) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(innerPadding).fillMaxWidth(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(state.projects, key = { it.id }) { project ->
-                Surface(
-                    modifier = Modifier.fillMaxWidth().height(40.dp),
-                    tonalElevation = 16.dp,
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxHeight()) {
-                        Box(modifier = Modifier.weight(1f).fillMaxHeight().clickable {
-                            navController.navigate(Graph.Project(project.id))
 
-                        }.padding(8.dp), contentAlignment = Alignment.CenterStart) {
-                            Text(project.name)
+        if (state.projects.isEmpty()) {
+            Box(Modifier.padding(innerPadding).fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("No projects", fontSize = 32.sp, fontWeight = FontWeight.SemiBold)
+            }
+        } else {
+
+            LazyColumn(
+                modifier = Modifier.padding(innerPadding).fillMaxWidth(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(state.projects, key = { it.id }) { project ->
+                    Surface(
+                        modifier = Modifier.fillMaxWidth().height(40.dp),
+                        tonalElevation = 16.dp,
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxHeight()) {
+                            Box(modifier = Modifier.weight(1f).fillMaxHeight().clickable {
+                                navController.navigate(Graph.Project(project.id))
+
+                            }.padding(8.dp), contentAlignment = Alignment.CenterStart) {
+                                Text(project.name)
+                            }
+
+                            IconButton(
+                                onClick = {
+                                    deleteDialogShown = true
+                                    deleteProjectId = project.id
+                                },
+                                modifier = Modifier.height(IntrinsicSize.Max).width(IntrinsicSize.Max)
+                            ) {
+                                Icon(Icons.Filled.Delete, contentDescription = "Delete project")
+                            }
+                            IconButton(onClick = {
+                                editProjectId = project.id
+                                editDialogShown = true
+                            }) {
+                                Icon(Icons.Filled.Edit, contentDescription = "Change name")
+                            }
                         }
 
-                        IconButton(
-                            onClick = {
-                                deleteDialogShown = true
-                                deleteProjectId = project.id
-                            },
-                            modifier = Modifier.height(IntrinsicSize.Max).width(IntrinsicSize.Max)
-                        ) {
-                            Icon(Icons.Filled.Delete, contentDescription = "Delete project")
-                        }
-                        IconButton(onClick = {
-                            editProjectId = project.id
-                            editDialogShown = true
-                        }) {
-                            Icon(Icons.Filled.Edit, contentDescription = "Change name")
-                        }
                     }
-
                 }
             }
         }

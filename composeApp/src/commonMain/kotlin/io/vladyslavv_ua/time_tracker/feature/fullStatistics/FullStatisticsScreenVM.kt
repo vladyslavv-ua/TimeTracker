@@ -19,7 +19,6 @@ import java.io.File
 
 class FullStatisticsScreenVM(file: File) : ViewModel() {
     //    private val file = File(System.getProperty("user.dir"), "my_room.db")
-//    private val connection = DbConnectionConfig()
     private val connection = DbConnectionConfig("jdbc:sqlite:$file")
 
     private val _state = MutableStateFlow(FullStatisticsState())
@@ -30,13 +29,13 @@ class FullStatisticsScreenVM(file: File) : ViewModel() {
         println(file.absolutePath)
 
         viewModelScope.launch {
+
             val joinedTimeLaps =
                 DataFrame.readSqlQuery(
                     connection,
                     "select time_lap.id, project.name, time_lap.startedAt, time_lap.endedAt from time_lap join project on time_lap.projectId = project.id where time_lap.endedAt NOT NULL"
                 )
 
-            // Перетворення колонок на LocalDateTime
             val withDurations =
                 joinedTimeLaps.convert("startedAt", "endedAt") {
                     LocalDateTime.parse((it?.toString() ?: 0).toString())

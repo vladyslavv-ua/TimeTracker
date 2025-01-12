@@ -31,7 +31,6 @@ fun getDatabasePath(ctx: Context): File {
 fun getDatabaseBuilder(ctx: Context): RoomDatabase.Builder<AppDB> {
     val appContext = ctx.applicationContext
     val dbFile = appContext.getDatabasePath("my_room.db")
-    println("room" + dbFile)
     return Room.databaseBuilder<AppDB>(
         context = appContext,
         name = dbFile.absolutePath

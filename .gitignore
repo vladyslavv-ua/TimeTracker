@@ -18,4 +18,4 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 /composeApp/my_room.db
 /composeApp/my_room.db.lck
-/composeApp/release/
+composeApp/release/

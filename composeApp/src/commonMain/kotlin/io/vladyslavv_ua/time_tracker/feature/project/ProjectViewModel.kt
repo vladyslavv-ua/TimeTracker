@@ -9,6 +9,7 @@ import io.vladyslavv_ua.time_tracker.repo.TimeLapRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -18,10 +19,7 @@ class ProjectViewModel(
     private val projectId: Long,
     private val projectRepo: ProjectRepo,
     private val timeLapRepo: TimeLapRepo
-) : ViewModel(),
-
-
-    IViewModelMVI<ProjectIntent> {
+) : ViewModel(), IViewModelMVI<ProjectIntent> {
     private val _projectState = MutableStateFlow(ProjectState())
     val projectState: StateFlow<ProjectState> = _projectState
 
@@ -45,6 +43,11 @@ class ProjectViewModel(
             is ProjectIntent.NewLoop -> {
                 newLoop()
             }
+
+            is ProjectIntent.DeleteTimeLap -> {
+                deleteTimeLap(intent.id)
+            }
+
         }
     }
 
@@ -66,6 +69,11 @@ class ProjectViewModel(
                 )
             )
         }
+        _projectState.update {
+            it.copy(
+                lastIntent = ProjectIntent.CompleteLoop,
+            )
+        }
         updateProjectLastUse()
     }
 
@@ -75,11 +83,27 @@ class ProjectViewModel(
                 TimeLap(
                     id = 0,
                     projectId = projectId,
-                    startedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                    startedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
                 )
             )
         }
         updateProjectLastUse()
+        _projectState.update {
+            it.copy(
+                lastIntent = ProjectIntent.NewLoop,
+            )
+        }
+    }
+
+    private fun deleteTimeLap(timeLapId: Long) {
+        viewModelScope.launch {
+            timeLapRepo.deleteTimeLap(timeLapId)
+            _projectState.update {
+                it.copy(
+                    lastIntent = ProjectIntent.DeleteTimeLap(timeLapId),
+                )
+            }
+        }
     }
 
 }

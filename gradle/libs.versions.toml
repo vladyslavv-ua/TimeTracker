@@ -3,33 +3,35 @@ agp = "8.7.3"
 android-compileSdk = "35"
 android-minSdk = "25"
 android-targetSdk = "35"
-androidx-activityCompose = "1.10.0"
+androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.7.0"
-androidx-core-ktx = "1.15.0"
+androidx-core-ktx = "1.16.0"
 androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.7.3"
-compose-navigation = "2.8.0-alpha12"
+compose-plugin = "1.8.0"
+compose-navigation = "2.9.0-beta01"
 compose-viewmodel = "2.8.4"
 
-dataframe = "0.15.0"
+dataframe = "1.0.0-Beta2"
 
 junit = "4.13.2"
 
-koalaplot = "0.7.0"
+koalaplot = "0.8.0"
 
-koin = "4.1.0-Beta4"
-kotlin = "2.1.10"
-kotlinx-coroutines = "1.9.0"
+koin = "4.1.0-RC1"
+kotlin = "2.1.21"
+kotlinx-coroutines = "1.10.1"
 kotlinx-datetime = "0.6.1"
-ksp-version = "2.1.10-1.0.29"
+ksp-version = "2.1.21-2.0.1"
 
-room = "2.7.0-beta01"
+material-icons = "1.7.3"
+
+room = "2.7.1"
 
 serialization = "1.8.0"
-sqlite = "2.5.0-beta01"
-sqlite-jdbc = "3.49.0.0"
+sqlite = "2.5.1"
+sqlite-jdbc = "3.49.1.0"
 
 
 
@@ -61,6 +63,8 @@ koin-compose-jvm = { module = "io.insert-koin:koin-compose-jvm", version.ref = "
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
+
+material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "material-icons" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }

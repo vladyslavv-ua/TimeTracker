@@ -18,7 +18,6 @@ room {
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -34,6 +33,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.android.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
 
         }
 
@@ -41,12 +41,16 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(libs.material.icons.core)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.compose.navigation)
             implementation(libs.compose.viewmodel)
             implementation(libs.kotlinx.serialization)
+
+            implementation(libs.androidx.lifecycle.runtime.compose)
+
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

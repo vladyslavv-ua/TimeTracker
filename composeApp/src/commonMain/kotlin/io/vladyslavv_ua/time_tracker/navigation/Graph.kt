@@ -16,4 +16,7 @@ sealed class Graph(val destination: String) {
 
     @Serializable
     data object FullStatistics : Graph("full_statistics")
+
+    @Serializable
+    data class ProjectStatistics(val projectId: Long) : Graph("project_statistics")
 }

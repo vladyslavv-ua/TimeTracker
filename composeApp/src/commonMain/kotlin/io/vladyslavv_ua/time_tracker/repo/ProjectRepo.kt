@@ -2,9 +2,9 @@ package io.vladyslavv_ua.time_tracker.repo
 
 import io.vladyslavv_ua.time_tracker.datasource.room.AppDB
 import io.vladyslavv_ua.time_tracker.entity.Project
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 
 class ProjectRepo(appDB: AppDB) {
     private val projectDao = appDB.projectDao()

@@ -35,6 +35,16 @@ fun ProjectScreen(navController: NavController, viewModel: ProjectViewModel) {
 
         }
     }
+
+    LaunchedEffect(Unit){
+        viewModel.projectSideEffect.collect { effect ->
+            when(effect) {
+                is ProjectSideEffect.OpenProject -> {
+                    navController.navigate(Graph.ProjectStatistics(effect.projectId))
+                }
+            }
+        }
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -47,7 +57,9 @@ fun ProjectScreen(navController: NavController, viewModel: ProjectViewModel) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        viewModel.onIntent(ProjectIntent.OpenProjectStatistics)
+                    }) {
                         Icon(painterResource(Res.drawable.ic_equalizer_24), contentDescription = "Statistics")
                     }
                 })

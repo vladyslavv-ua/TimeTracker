@@ -1,9 +1,6 @@
 package io.vladyslavv_ua.time_tracker.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,13 +9,14 @@ import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreen
 import io.vladyslavv_ua.time_tracker.feature.fullStatistics.FullStatisticsScreenVM
 import io.vladyslavv_ua.time_tracker.feature.project.ProjectScreen
 import io.vladyslavv_ua.time_tracker.feature.project.ProjectViewModel
+import io.vladyslavv_ua.time_tracker.feature.projectStatistics.ProjectStatisticsScreen
+import io.vladyslavv_ua.time_tracker.feature.projectStatistics.ProjectStatisticsViewModel
 import org.koin.compose.koinInject
 import io.vladyslavv_ua.time_tracker.feature.projects.ProjectsScreen
 import io.vladyslavv_ua.time_tracker.feature.projects.ProjectsViewModel
 import io.vladyslavv_ua.time_tracker.feature.timeLapInfo.TimeLapInfoScreen
 import io.vladyslavv_ua.time_tracker.feature.timeLapInfo.TimeLapInfoViewModel
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.koinApplication
 
 
 @Composable
@@ -48,6 +46,15 @@ fun RootNavigation(navController: NavHostController) {
             val vm: FullStatisticsScreenVM = koinInject()
             FullStatisticsScreen(navController, vm)
         }
+
+        composable<Graph.ProjectStatistics> { entry ->
+            val project: Graph.ProjectStatistics = entry.toRoute()
+            val vm: ProjectStatisticsViewModel = koinInject {
+                parametersOf(project.projectId)
+            }
+            ProjectStatisticsScreen(navController, vm)
+        }
+
 
     }
 }

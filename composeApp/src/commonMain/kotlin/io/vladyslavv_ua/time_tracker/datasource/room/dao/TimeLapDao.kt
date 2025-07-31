@@ -20,4 +20,7 @@ interface TimeLapDao {
 
     @Query("DELETE FROM time_lap WHERE id = :id")
     suspend fun deleteTimeLap(id: Long)
+
+    @Query("SELECT * FROM time_lap WHERE projectId=:projectId")
+    suspend fun getAllTimeLapsFromProject(projectId: Long): List<TimeLap>
 }

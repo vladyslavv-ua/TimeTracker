@@ -10,4 +10,5 @@ class TimeLapRepo(appDB: AppDB) {
     suspend fun getTimeLapById(id:Long) = timeLapDao.getTimeLapById(id)
     suspend fun updateLabel(id: Long, label: String) = timeLapDao.updateTimeLapLabel(id, label)
     suspend fun deleteTimeLap(id: Long) = timeLapDao.deleteTimeLap(id)
+    suspend fun getTimeLapsByProject(projectId: Long) = timeLapDao.getAllTimeLapsFromProject(projectId)
 }

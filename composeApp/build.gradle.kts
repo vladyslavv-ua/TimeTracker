@@ -1,6 +1,9 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+//import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+//import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -17,7 +20,12 @@ room {
 }
 
 kotlin {
+    compilerOptions {
+        optIn.add("kotlin.time.ExperimentalTime")
+
+    }
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -134,6 +142,8 @@ android {
         }
     }
     compileOptions {
+//        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -142,6 +152,8 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
+//        coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
+
     }
 }
 
@@ -166,10 +178,20 @@ dependencies {
     add("kspDesktop", libs.room.compiler)
     add("kspAndroid", libs.room.compiler)
     add("kspCommonMainMetadata", libs.room.compiler)
+
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-}
+//tasks.withType<KotlinJvmCompile>().configureEach {
+//    compilerOptions {
+//        jvmTarget.set(JvmTarget.JVM_11)
+//        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+//    }
+//}
 
+//kotlin {
+//    compilerOptions{
+//        jvmToolchain(21)
+//        optIn.add("kotlin.time.ExperimentalTime")
+//    }
+//}
 configurations.forEach { println(it.name) }

@@ -7,13 +7,15 @@ import io.vladyslavv_ua.time_tracker.globalInterface.IViewModelMVI
 import io.vladyslavv_ua.time_tracker.repo.ProjectRepo
 import io.vladyslavv_ua.time_tracker.repo.TimeLapRepo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 
 class ProjectViewModel(
     private val projectId: Long,
@@ -22,6 +24,11 @@ class ProjectViewModel(
 ) : ViewModel(), IViewModelMVI<ProjectIntent> {
     private val _projectState = MutableStateFlow(ProjectState())
     val projectState: StateFlow<ProjectState> = _projectState
+
+
+    private val _projectSideEffects = Channel<ProjectSideEffect>()
+    val projectSideEffect = _projectSideEffects.receiveAsFlow()
+
 
     private var isProjectLastUseUpdated: Boolean = false
 
@@ -48,6 +55,12 @@ class ProjectViewModel(
                 deleteTimeLap(intent.id)
             }
 
+            is ProjectIntent.OpenProjectStatistics -> {
+                viewModelScope.launch {
+                    _projectSideEffects.send(ProjectSideEffect.OpenProject(projectId))
+
+                }
+            }
         }
     }
 

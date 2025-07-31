@@ -31,7 +31,11 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm("desktop"){
+        compilerOptions{
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
 
     sourceSets {
         val desktopMain by getting
@@ -142,7 +146,7 @@ android {
         }
     }
     compileOptions {
-//        isCoreLibraryDesugaringEnabled = true
+        //        isCoreLibraryDesugaringEnabled = true
 
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -152,7 +156,7 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
-//        coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
+        //        coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
 
     }
 }
@@ -188,10 +192,6 @@ dependencies {
 //    }
 //}
 
-//kotlin {
-//    compilerOptions{
-//        jvmToolchain(21)
-//        optIn.add("kotlin.time.ExperimentalTime")
-//    }
-//}
+
+
 configurations.forEach { println(it.name) }

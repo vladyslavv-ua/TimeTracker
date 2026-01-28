@@ -51,6 +51,7 @@ class FullStatisticsScreenVM(file: File) : ViewModel() {
                 val sum = mean(*listOf("duration").toTypedArray())
                 add("proportion") { sum }
             }.concat()
+
 //            // Обчислення середнього і загального часу
 //            val totalDuration = withDurations.sumOf(*(listOf("duration").toTypedArray()))
 //            val averageDuration = withDurations.meanOf("duration")

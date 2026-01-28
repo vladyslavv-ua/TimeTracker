@@ -1,17 +1,17 @@
 [versions]
-agp = "8.10.1"
-android-compileSdk = "35"
+agp = "8.11.0"
+android-compileSdk = "36"
 android-minSdk = "26"
 android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.7.1"
-androidx-core-ktx = "1.16.0"
+androidx-core-ktx = "1.17.0"
 androidx-espresso-core = "3.7.0"
-androidx-lifecycle = "2.9.1"
+androidx-lifecycle = "2.9.2"
 androidx-test-junit = "1.3.0"
-compose-plugin = "1.8.0"
-compose-navigation = "2.9.0-beta03"
-compose-viewmodel = "2.9.1"
+compose-plugin = "1.8.2"
+compose-navigation = "2.9.0-beta05"
+compose-viewmodel = "2.9.2"
 
 dataframe = "1.0.0-Beta2"
 
@@ -20,7 +20,7 @@ junit = "4.13.2"
 koalaplot = "0.9.0"
 
 koin = "4.1.0"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1"
 ksp-version = "2.2.0-2.0.2"
@@ -31,7 +31,7 @@ room = "2.7.2"
 
 serialization = "1.9.0"
 sqlite = "2.5.2"
-sqlite-jdbc = "3.49.1.0"
+sqlite-jdbc = "3.50.3.0"
 
 
 

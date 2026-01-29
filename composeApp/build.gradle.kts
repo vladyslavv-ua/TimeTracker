@@ -25,14 +25,13 @@ kotlin {
 
     }
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
-    jvm("desktop"){
-        compilerOptions{
+    jvm("desktop") {
+        compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
@@ -41,7 +40,7 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            implementation(compose.preview)
+            implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.android.compose)
@@ -50,13 +49,13 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.material3)
             implementation(libs.material.icons.core)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.navigation)
             implementation(libs.compose.viewmodel)
             implementation(libs.kotlinx.serialization)
@@ -80,10 +79,10 @@ kotlin {
 
         }
         desktopMain.dependencies {
-            implementation(compose.desktop.linux_x64)
-            implementation(compose.desktop.macos_x64)
-            implementation(compose.desktop.macos_arm64)
-            implementation(compose.desktop.windows_x64)
+            implementation(libs.compose.desktop.linuxX64)
+            implementation(libs.compose.desktop.winX64)
+            implementation(libs.compose.desktop.macosX64)
+            implementation(libs.compose.desktop.macosArm64)
             implementation(libs.koin.compose.jvm)
             implementation(libs.kotlinx.coroutines.swing)
         }
@@ -155,7 +154,7 @@ android {
         compose = true
     }
     dependencies {
-        debugImplementation(compose.uiTooling)
+        debugImplementation(libs.compose.uiTooling)
         //        coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.5")
 
     }
@@ -191,7 +190,6 @@ dependencies {
 //        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
 //    }
 //}
-
 
 
 configurations.forEach { println(it.name) }
